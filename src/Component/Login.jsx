@@ -26,8 +26,6 @@ const Login = (props) => {
        
         
           if (user) {
-            console.log(email);
-            console.log(password);
             alert("credential matched..");
             setCredentialMessage(true);
             setT1(true);
