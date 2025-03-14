@@ -21,9 +21,11 @@ const Login = (props) => {
       
       const login = () => {
         alert("login clicked...");
+
+        const user = data.find((user)=>user.email === email && user.password === password)
        
-        data.map((user) => {
-          if (user.email == email && user.password == password) {
+        
+          if (user) {
             console.log(email);
             console.log(password);
             alert("credential matched..");
@@ -35,13 +37,13 @@ const Login = (props) => {
               localStorage.setItem('Email',email);
               localStorage.setItem('Password',password)
             }
-            return;
+            
           } else {
             setCredentialMessage(false);
             console.log("credential do not match");
-            return;
+            
           }
-        });
+        
       };
 
       
