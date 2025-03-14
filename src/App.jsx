@@ -7,16 +7,18 @@ function App() {
 
   const[credentialData, setCredentialData] = useState(false)
 
+  const storedEmail = localStorage.getItem("Email") ;
+  const storedPassword = localStorage.getItem("Password") 
 
-  function loginPage(check){
-    setCredentialData(check)
+  if(storedEmail && storedPassword){
+    setCredentialData(true)
   }
 
   return (  
     <>
       <Router>
         <Routes>
-          <Route path="/" element={<Login  loginpagef={loginPage}/>} />
+          <Route path="/" element={<Login/>} />
           {credentialData && <Route path="/landing" element={<Section/>} />}
         </Routes>
       </Router>

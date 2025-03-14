@@ -1,34 +1,38 @@
 import React, { use, useEffect, useState } from 'react'
 import useEcomStore from "./../../store/useEcomStore";
+import { useNavigate } from 'react-router-dom';
 
 
-const Login = (props) => {
+const Login = () => {
       const { data, loading, error, fetchData } = useEcomStore();
       const [email, setEmail] = useState("");
       const [password, setPassword] = useState("");
       const [checkIn, setCheckIn] = useState(false);
       const [credentialmessage, setCredentialMessage] = useState(true);
-      const[t1,setT1] = useState(false)
+    
 
-      {props.loginpagef(t1)}
+      const navigate = useNavigate()
+
+      const handleClick=()=>{
+        navigate("/landing")
+      }
        
 
       useEffect(() => {
         fetchData();
       }, [fetchData]);
     
-      // console.log(checkIn);
+      // console.log(checkIn)
       
       const login = () => {
-        alert("login clicked...");
+
 
         const user = data.find((user)=>user.email === email && user.password === password)
        
         
           if (user) {
-            alert("credential matched..");
             setCredentialMessage(true);
-            setT1(true);
+            handleClick();
    
 
             if(checkIn){
