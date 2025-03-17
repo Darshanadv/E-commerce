@@ -14,9 +14,12 @@ const Login = () => {
       const navigate = useNavigate()
 
       const handleClick=()=>{
+        console.log('before..');
+        
         navigate("/landing")
+        console.log("after...");
+        
       }
-       
 
       useEffect(() => {
         fetchData();
@@ -28,17 +31,21 @@ const Login = () => {
 
 
         const user = data.find((user)=>user.email === email && user.password === password)
+       console.log(user);
        
+        console.log(checkIn);
         
           if (user) {
             setCredentialMessage(true);
-            handleClick();
-   
 
             if(checkIn){
               localStorage.setItem('Email',email);
               localStorage.setItem('Password',password)
             }
+
+            handleClick();
+            // setTimeout(()=>handleClick,1000)
+   
             
           } else {
             setCredentialMessage(false);
@@ -82,6 +89,7 @@ const Login = () => {
           <div className="flex justify-between items-center mb-3">
             <div className="flex items-center">
               <input
+              onClick={()=>setCheckIn(true)}
                 id="loginRememberMe"
                 type="checkbox"
                 className="mr-3 rounded border-gray-300 text-purple-500 focus:ring-purple-500"

@@ -1,6 +1,8 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 
 const Header = () => {
+  const navigate = useNavigate();
   return (
     <>
       <header className="flex justify-between bg-slate-800 shadow-md text-white">
@@ -10,7 +12,7 @@ const Header = () => {
             Logo{" "}
           </a>
         </div>
-        <div className="block fixed z-10 top-0 left-0 bottom-0 height h-full w-[220px] transition-all bg-slate-900 md:hidden">
+        {/* <div className="block fixed z-10 top-0 left-0 bottom-0 height h-full w-[220px] transition-all bg-slate-900 md:hidden">
           <ul>
             <li>
               <a
@@ -33,8 +35,8 @@ const Header = () => {
                 href="#"
                 className="block py-2 px-3 transition-colors hover:bg-slate-800"
               >
-                Something
-              </a>
+                {/* Something */}
+              {/* </a>
             </li>
           </ul>
           <ul>
@@ -216,8 +218,8 @@ const Header = () => {
                 Register now
               </a>
             </li>
-          </ul>
-        </div>
+          </ul> */}
+        {/* </div> */} 
         <nav className="hidden md:block">
           <ul className="grid grid-flow-col">
             <li>
@@ -300,8 +302,12 @@ const Header = () => {
               <ul className="absolute z-10 right-0 bg-slate-800 py-2 w-48">
                 <li>
                   <a
-                    href="/src/profile.html"
+                    href="/profile"
                     className="flex px-3 py-2 hover:bg-slate-900"
+                    onClick={(e) => {
+                      e.preventDefault(); 
+                      navigate("/profile"); 
+                    }}
                   >
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
@@ -322,8 +328,12 @@ const Header = () => {
                 </li>
                 <li>
                   <a
-                    href="/src/watchlist.html"
+                    href="/watchlist"
                     className="flex items-center px-3 py-2 hover:bg-slate-900"
+                    onClick={(e) => {
+                      e.preventDefault(); 
+                      navigate("/watchlist"); 
+                    }}
                   >
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
@@ -344,8 +354,12 @@ const Header = () => {
                 </li>
                 <li>
                   <a
-                    href="/src/orders.html"
+                    href="/orders"
                     className="flex px-3 py-2 hover:bg-slate-900"
+                    onClick={(e) => {
+                      e.preventDefault(); 
+                      navigate("/orders"); 
+                    }}
                   >
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
@@ -368,6 +382,11 @@ const Header = () => {
                   <a
                     href="/src/logout.html"
                     className="flex px-3 py-2 hover:bg-slate-900"
+                    onClick={(e) => {
+                      e.preventDefault(); 
+                      localStorage.clear();
+                      navigate("/"); 
+                    }}
                   >
                     <svg
                       xmlns="http://www.w3.org/2000/svg"

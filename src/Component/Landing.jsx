@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from "react";
 import useEcomStore from "../../store/useEcomStore";
 import Header from "./Header"
-const Section = () => {
-  const { productData,  loading, error, fetchproductData } =
-    useEcomStore();
+const Landing = () => {
+  const { productData,  loading, error, fetchproductData } = useEcomStore();
 
 
   useEffect(() => {
@@ -12,7 +11,6 @@ const Section = () => {
 
   console.log(productData);
   
-
 
   return (
     <div>
@@ -70,4 +68,4 @@ const Section = () => {
   );
 };
 
-export default Section;
+export default Landing;
