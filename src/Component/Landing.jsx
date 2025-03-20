@@ -1,29 +1,44 @@
 import React, { useEffect, useState } from "react";
 import useEcomStore from "../../store/useEcomStore";
 import Header from "./Header"
+import {useNavigate } from "react-router-dom";
+import Products from "./Products";
+
 const Landing = () => {
   const { productData,  loading, error, fetchproductData } = useEcomStore();
+  const navigate = useNavigate()
 
+  const[clickedItemId, setclickedItemId] = useState("");
 
   useEffect(() => {
     fetchproductData();
   }, []);
 
-  console.log(productData);
   
 
   return (
     <div>
         <Header />
+        {/* <Products /> */}
       <div className="grid gap-8 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 p-5">
         {/* Product Item */}
 
         {productData.map((res) => (
           <div
             key={res.id}
+
             className="border border-1 border-gray-200 rounded-md hover:border-purple-600 transition-colors bg-white"
           >
-            <a href="./../src/product.html" className="block overflow-hidden">
+            <a href="./../src/product.html" className="block overflow-hidden"
+            onClick={(e) => {
+              e.preventDefault(); 
+              navigate("/products");
+              // console.log(res.id);
+              setclickedItemId(res.id);
+              localStorage.setItem("Clicked Item",res.id);
+              
+            }}>
+            
               <img
                 src={res.image}
                 alt=""

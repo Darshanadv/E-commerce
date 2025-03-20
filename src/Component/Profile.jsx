@@ -1,30 +1,47 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import Header from './Header'
 import useEcomStore from '../../store/useEcomStore'
 
 const Profile = () => {
-  const { data, loading, error, fetchData ,productData,  fetchproductData} = useEcomStore();
+  const { data,fetchData} = useEcomStore();
+
+  const [userDetail, setUserDetial] = useState();
+
 
   useEffect(() => {
-    fetchproductData();
+    fetchData();
   }, []);
+
+  useEffect(()=>{
+    if(data.length>0){
+      const storedEmail = localStorage.getItem("Email");
+      if(storedEmail){
+        const matchUser = data.find((user)=> user.email===storedEmail )
+        if(matchUser){
+          console.log(matchUser);
+          setUserDetial(matchUser);
+          
+        }
+      }
+    }
+  }, [data])
+
+  // console.log(data);
+  
 
   return (
     <>
      <Header />
-
-   {/* {
-    data.map((res)=>{
+    
+   {
+    data.map((res)=>(
       <div key={res.id}>
-          {console.log(res.email)
-          }
+          {/* {console.log(res.email)} */}
       </div>
-    })
-   } */}
+    )) 
+   }
 
 
-
- 
     
 
   <main className="p-5">
@@ -47,6 +64,7 @@ const Profile = () => {
                 placeholder="Your Email"
                 type="email"
                 name="email"
+                value={userDetail?.email}
                 className="border-gray-300 focus:border-purple-500 focus:outline-none focus:ring-purple-500 rounded-md w-full"
               />
             </div>

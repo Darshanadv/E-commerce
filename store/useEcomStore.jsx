@@ -2,7 +2,7 @@ import { create } from "zustand";
 import axios from "axios";
 
 const useEcomStore = create((set) => ({
-  data: null,
+  data: [],
   loading: false,
   error: null,
 

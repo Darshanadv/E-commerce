@@ -25,16 +25,16 @@ function App() {
       <Router>
         <Routes>
           
-            <Route path="/landing" element={credentialData? <Landing /> : <Navigate to="/" /> } />
-          
-            <Route path="/" element={credentialData? <Navigate to="/landing" /> : <Login/> } />
+            <Route path= "/" element={<Login />}/>
+            <Route path= "/landing" element={<Landing />}/>
+            <Route path= "/signup" element={<Signup />}/>
+            <Route path= "/watchlist" element={<Watchlist />}/>
+             <Route path= "/products" element={<Products />}/>
+             <Route path= "/profile" element={<Profile />}/>
+             <Route path= "/ordersdetail" element={<Ordersdetail />}/>
+             <Route path= "/orders" element={<Orders />}/>
 
-            <Route path="/orders" element ={credentialData? <Orders/>: <Navigate to="/" />} />
-            <Route path="/ordersdetail" element = {credentialData? <Ordersdetail />: <Navigate to= "/"/>}/>
-            <Route path="/products" element = {credentialData? <Products/>:<Navigate to="/"/>} />
-            <Route path="/profile" element ={credentialData?<Profile/>:<Navigate to="/"/>} />
-            <Route path="/signup" element = {credentialData?<Signup/>:<Navigate to="/"/>}/>
-            <Route path="/watchlist" element = {credentialData? <Watchlist/> : <Navigate to="/"/>} />
+         
         </Routes>
       </Router>
 

@@ -10,16 +10,18 @@ const Login = () => {
       const [checkIn, setCheckIn] = useState(false);
       const [credentialmessage, setCredentialMessage] = useState(true);
     
+      const storedEmail = localStorage.getItem("Email");
+      const storedPassword = localStorage.getItem("Password");
 
       const navigate = useNavigate()
 
-      const handleClick=()=>{
-        console.log('before..');
+      // const handleClick=()=>{
+      //   console.log('before..');
         
-        navigate("/landing")
-        console.log("after...");
+      //   navigate("/landing")
+      //   console.log("after...");
         
-      }
+      // }
 
       useEffect(() => {
         fetchData();
@@ -27,38 +29,73 @@ const Login = () => {
     
       // console.log(checkIn)
       
-      const login = () => {
+      // const login = () => {
 
 
-        const user = data.find((user)=>user.email === email && user.password === password)
-       console.log(user);
+      //   const user = data.find((user)=>user.email === email && user.password === password)
+      //  console.log(user);
        
-        console.log(checkIn);
+      //   console.log(checkIn);
         
-          if (user) {
-            setCredentialMessage(true);
+      //     if (user) {
+      //       setCredentialMessage(true);
 
-            if(checkIn){
-              localStorage.setItem('Email',email);
-              localStorage.setItem('Password',password)
-            }
+      //       if(checkIn){
+      //         localStorage.setItem('Email',email);
+      //         localStorage.setItem('Password',password)
+      //       }
 
-            handleClick();
-            // setTimeout(()=>handleClick,1000)
+      //       handleClick();
+      //       // setTimeout(()=>handleClick,1000)
    
             
-          } else {
-            setCredentialMessage(false);
-            console.log("credential do not match");
+      //     } else {
+      //       setCredentialMessage(false);
+      //       console.log("credential do not match");
             
-          }
+      //     }
         
-      };
+      // };
+
+      useEffect(()=>{
+        if(storedEmail&&storedPassword){
+          // return;
+          navigate("/landing")
+        }else{
+          navigate("/")
+        }
+      },[])
+
+
+      const login = () => {
+        console.log("Data before login attempt:", data);
+        if (!data || data.length === 0) {
+            console.log("Data is not available yet. Please wait...");
+            return;
+        }
+    
+        const user = data.find((user) => user.email === email && user.password === password);
+        console.log("User found:", user);
+    
+        if (user) {
+            setCredentialMessage(true);
+            if (checkIn) {
+                localStorage.setItem("Email", email);
+    localStorage.setItem("Password", password);
+            }
+            console.log("Navigating to /landing...");
+            setTimeout(() => navigate("/landing"), 300);
+        } else {
+            setCredentialMessage(false);
+            console.log("Credentials do not match");
+        }
+    };
 
       
 
   return (
    <>
+
          <main className="p-5 bg-gray-100 h-screen">
         <form className="w-[400px] mx-auto p-6 my-16" noValidate>
           <h2 className="text-2xl font-semibold text-center mb-5 ">

@@ -1,8 +1,11 @@
 import React from 'react'
+import Header from './Header'
 
 const Ordersdetail = () => {
   return (
     <>
+
+    <Header />
   {/* <meta charSet="UTF-8" /> */}
   {/* <meta name="viewport" content="width=device-width, initial-scale=1.0" /> */}
   {/* <link href="/dist/output.css" rel="stylesheet" /> */}
