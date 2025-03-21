@@ -6,7 +6,7 @@ const Products = () => {
 
   const{fetchproductData,productData} = useEcomStore();
 
-  const [productItem, setProductItem] = useState();
+  const [productItem, setProductItem] = useState({});
   const clickedItem = localStorage.getItem("Clicked Item");
 
    useEffect(() => {
@@ -58,7 +58,9 @@ const Products = () => {
          <div className="grid gap-6 grid-cols-5">
            <div className="col-span-3">
              <div className="aspect-square flex items-center">
-               <img src="/src/img/1_1.jpg" alt="" />
+             
+               <img src={productItem.image}alt="product image" />  {/* product image fetched*/}
+               
              </div>
              <div className="flex relative">
                <button className="absolute left-0 top-0 h-full text-white bg-black/30 hover:bg-black/50">
@@ -124,7 +126,7 @@ const Products = () => {
                {/* Logitech G502 HERO High Performance Wired Gaming Mouse, HERO 25K
                Sensor, 25,600 DPI, RGB, Adjustable Weights, 11 */}
 
-                  {/* {productItem.title} */}
+                  {productItem.title}
 
              </h1>
              
@@ -215,7 +217,7 @@ const Products = () => {
              </button>
              <div className="text-gray-500 mb-6 wysiwyg-content">
                <table>
-                 <tbody>
+                 {/* <tbody>
                    <tr>
                      <td>Connectivity Technology</td>
                      <td>USB</td>
@@ -236,16 +238,13 @@ const Products = () => {
                      <td>Series</td>
                      <td>Logitech G502 HERO High Performance Gaming Mouse</td>
                    </tr>
-                 </tbody>
+                 </tbody> */}
                </table>
                <p className="">
-                 Lorem ipsum dolor, sit amet consectetur adipisicing elit. Deserunt
-                 suscipit natus quisquam optio voluptatem quo beatae ex similique,
-                 pariatur laborum asperiores explicabo delectus culpa cumque corrupti
-                 quasi incidunt at quos!
+                {productItem.description}
                </p>
                <h4>About the item</h4>
-               <ul className="list-disc pl-6">
+               {/* <ul className="list-disc pl-6">
                  <li>
                    Hero 25K sensor through a software update from G HUB, this upgrade
                    is free to all players: Our most advanced, with 1:1 tracking,
@@ -272,7 +271,7 @@ const Products = () => {
                    system and pivot hinges are built into left and right gaming mouse
                    buttons for a crisp, clean click feel with rapid click feedback
                  </li>
-               </ul>
+               </ul> */}
              </div>
            </div>
          </div>

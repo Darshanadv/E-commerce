@@ -1,7 +1,17 @@
 import React from 'react'
 import Header from './Header'
+import useEcomStore from "../../store/useEcomStore";
+import { useEffect, useState } from "react";
 
 const Watchlist = () => {
+
+  const {loadWatchlist, watchlist} = useEcomStore();
+
+  useEffect(()=>{
+    loadWatchlist()
+  },[])
+  
+
   return (
     <>
     <Header />
@@ -11,86 +21,37 @@ const Watchlist = () => {
     <h1 className="text-3xl font-bold mb-6">Your Watchlist</h1>
     {/* Product Items */}
     <div className="bg-white p-4 rounded-lg shadow">
+
       {/* Product Item */}
-      <div className="flex flex-col sm:flex-row items-center gap-4">
-        <img src="/src/img/1_1.jpg" className="w-36" alt="" />
-        <div className="flex flex-col justify-between">
-          <div className="flex justify-between mb-3">
-            <h3>
-              Logitech G502 HERO High Performance Wired Gaming Mouse, HERO 25K
-              Sensor, 25,600 DPI, RGB, Adjustable Weights, 11
-            </h3>
-            <span className="text-lg font-semibold"> $17.99 </span>
+
+      {watchlist.map((item)=>(
+        
+        <div key={item.id} className="flex flex-col sm:flex-row items-center gap-4 justify-between"      >
+          <div>
+            <img src={item.image} className="w-36" alt="" />                   {/* image fetched..*/} 
           </div>
-          <div className="flex justify-end items-center">
+        <div>
+        <div className="flex flex-col justify-between">
+          <div className="flex flex-col justify-between mb-10">
+            <h3>
+              {item.title}                                                {/* title fetched..*/} 
+            </h3>
+            <span className="text-lg font-semibold"> {item.price} </span> {/* price fetched..*/} 
+          </div>
+          <div className="flex justify-start items-center">
             <a href="#" className="text-purple-600 hover:text-purple-500">
               Remove
             </a>
           </div>
         </div>
-      </div>
-      {/*/ Product Item */}
-      <hr className="my-5" />
-      {/* Product Item */}
-      <div className="flex flex-col sm:flex-row items-center gap-4">
-        <img src="/src/img/1_1.jpg" className="w-36" alt="" />
-        <div className="flex flex-col justify-between">
-          <div className="flex justify-between mb-3">
-            <h3>
-              Logitech G502 HERO High Performance Wired Gaming Mouse, HERO 25K
-              Sensor, 25,600 DPI, RGB, Adjustable Weights, 11
-            </h3>
-            <span className="text-lg font-semibold"> $17.99 </span>
-          </div>
-          <div className="flex justify-end items-center">
-            <a href="#" className="text-purple-600 hover:text-purple-500">
-              Remove
-            </a>
-          </div>
         </div>
+         
+        
       </div>
+      ))}
+      
       {/*/ Product Item */}
-      <hr className="my-5" />
-      {/* Product Item */}
-      <div className="flex flex-col sm:flex-row items-center gap-4">
-        <img src="/src/img/1_1.jpg" className="w-36" alt="" />
-        <div className="flex flex-col justify-between">
-          <div className="flex justify-between mb-3">
-            <h3>
-              Logitech G502 HERO High Performance Wired Gaming Mouse, HERO 25K
-              Sensor, 25,600 DPI, RGB, Adjustable Weights, 11
-            </h3>
-            <span className="text-lg font-semibold"> $17.99 </span>
-          </div>
-          <div className="flex justify-end items-center">
-            <a href="#" className="text-purple-600 hover:text-purple-500">
-              Remove
-            </a>
-          </div>
-        </div>
-      </div>
-      {/*/ Product Item */}
-      <hr className="my-5" />
-      {/* Product Item */}
-      <div className="flex flex-col sm:flex-row items-center gap-4">
-        <img src="/src/img/1_1.jpg" className="w-36" alt="" />
-        <div className="flex flex-col justify-between">
-          <div className="flex justify-between mb-3">
-            <h3>
-              Logitech G502 HERO High Performance Wired Gaming Mouse, HERO 25K
-              Sensor, 25,600 DPI, RGB, Adjustable Weights, 11
-            </h3>
-            <span className="text-lg font-semibold"> $17.99 </span>
-          </div>
-          <div className="flex justify-end items-center">
-            <a href="#" className="text-purple-600 hover:text-purple-500">
-              Remove
-            </a>
-          </div>
-        </div>
-      </div>
-      {/*/ Product Item */}
-      <hr className="my-5" />
+      
     </div>
     {/*/ Product Items */}
   </div>

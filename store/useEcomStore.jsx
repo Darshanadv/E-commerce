@@ -7,6 +7,8 @@ const useEcomStore = create((set) => ({
   error: null,
 
   productData: [],
+  watchlist: [],
+ 
 
   fetchData: async () => {
     set({ loading: true, error: null });
@@ -33,6 +35,22 @@ const useEcomStore = create((set) => ({
       set({ error: error.message, loading: false });
     }
   },
+
+  addToWatchlist: (products, userId)=>set((state)=>{
+    const updatedWatchlist = [...state.watchlist, {...products, userId}]
+
+
+    
+    localStorage.setItem("watchlist", JSON.stringify(updatedWatchlist))
+    return {watchlist: updatedWatchlist}
+  }),
+
+  loadWatchlist: ()=>{
+    const storedWatchlist = JSON.parse(localStorage.getItem("watchlist" || []))
+    set({watchlist: storedWatchlist})
+  }
+
+
 }));
 
 export default useEcomStore;

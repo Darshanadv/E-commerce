@@ -2,26 +2,35 @@ import React, { useEffect, useState } from "react";
 import useEcomStore from "../../store/useEcomStore";
 import Header from "./Header"
 import {useNavigate } from "react-router-dom";
-import Products from "./Products";
+
 
 const Landing = () => {
-  const { productData,  loading, error, fetchproductData } = useEcomStore();
+  const { productData,fetchproductData,addToWatchlist,loadWatchlist, watchlist } = useEcomStore();
   const navigate = useNavigate()
 
+  // const[likedProductButton, setLikedProductButton] = useState(false);
   const[clickedItemId, setclickedItemId] = useState("");
+
+  const userId = "user1"
+
+// console.log(watchlist[3]);       //.........................................
+
 
   useEffect(() => {
     fetchproductData();
   }, []);
+
+  useEffect(()=>{
+    loadWatchlist();
+  },[])
 
   
 
   return (
     <div>
         <Header />
-        {/* <Products /> */}
+      
       <div className="grid gap-8 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 p-5">
-        {/* Product Item */}
 
         {productData.map((res) => (
           <div
@@ -54,7 +63,11 @@ const Landing = () => {
               <h5 className="font-bold">{res.price}</h5>
             </div>
             <div className="flex justify-between py-3 px-4">
-              <button className="w-10 h-10 rounded-full border border-1 border-purple-600 flex items-center justify-center text-purple-600 hover:bg-purple-600 hover:text-white active:bg-purple-800 transition-colors">
+              <button className="w-10 h-10 rounded-full border border-1 border-purple-600 flex items-center justify-center text-purple-600 hover:bg-purple-600 hover:text-white active:bg-purple-800 transition-colors " onClick={()=>addToWatchlist(res, userId)}  >
+
+              {/* <button  className={`w-10 h-10 rounded-full border border-1 border-purple-600 flex items-center justify-center text-purple-600 hover:bg-purple-600 hover:text-whitetransition-colors " onClick={()=>{addToWatchlist(res, userId); setLikedProductButton(true)}} ${likedProductButton ? "bg-green-500" : "bg-blue-500"
+                                         }`} > */}
+
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   className="h-6 w-6"
