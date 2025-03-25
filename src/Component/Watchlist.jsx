@@ -5,11 +5,14 @@ import { useEffect, useState } from "react";
 
 const Watchlist = () => {
 
-  const {loadWatchlist, watchlist} = useEcomStore();
+  const {loadWatchlist, watchlist, removeFromWatchlist} = useEcomStore();
 
-  useEffect(()=>{
+  useEffect(()=>{    
     loadWatchlist()
   },[])
+  
+  // const watchlistitems = localStorage.getItem("watchlist");
+  // console.log(watchlistitems);
   
 
   return (
@@ -26,9 +29,9 @@ const Watchlist = () => {
 
       {watchlist.map((item)=>(
         
-        <div key={item.id} className="flex flex-col sm:flex-row items-center gap-4 justify-between"      >
+        <div key={item.id} className="flex flex-col sm:flex-row items-center gap-4"      >
           <div>
-            <img src={item.image} className="w-36" alt="" />                   {/* image fetched..*/} 
+            <img src={item.image} className="w-36 h-36 object-contain p-5" alt="" />                   {/* image fetched..*/} 
           </div>
         <div>
         <div className="flex flex-col justify-between">
@@ -39,9 +42,10 @@ const Watchlist = () => {
             <span className="text-lg font-semibold"> {item.price} </span> {/* price fetched..*/} 
           </div>
           <div className="flex justify-start items-center">
-            <a href="#" className="text-purple-600 hover:text-purple-500">
+            <button className="text-purple-600 hover:text-purple-500" 
+            onClick={()=>removeFromWatchlist(item.id)}>
               Remove
-            </a>
+            </button>
           </div>
         </div>
         </div>

@@ -81,7 +81,8 @@ const Login = () => {
             setCredentialMessage(true);
             if (checkIn) {
                 localStorage.setItem("Email", email);
-    localStorage.setItem("Password", password);
+                localStorage.setItem("Password", password);
+      
             }
             console.log("Navigating to /landing...");
             setTimeout(() => navigate("/landing"), 300);

@@ -5,27 +5,43 @@ import {useNavigate } from "react-router-dom";
 
 
 const Landing = () => {
-  const { productData,fetchproductData,addToWatchlist,loadWatchlist, watchlist } = useEcomStore();
+  const { productData,fetchproductData,addToWatchlist,loadWatchlist, watchlist,removeFromWatchlist,data,fetchData } = useEcomStore();
   const navigate = useNavigate()
 
   // const[likedProductButton, setLikedProductButton] = useState(false);
   const[clickedItemId, setclickedItemId] = useState("");
 
-  const userId = "user1"
 
-// console.log(watchlist[3]);       //.........................................
+  // const userId = "user1"
+  const userId = localStorage.getItem('Email');
 
+  
+  // const loggedinUserId =()=> data.some((i) => i.email === loggedinUserEmail)
+
+  const isInWatchlist = (id)=> watchlist.some((item)=> item.id === id)
+
+  const toggleWatchlist = (res) =>{
+
+
+    if(isInWatchlist (res.id)){
+      removeFromWatchlist(res.id);
+    }else{
+      addToWatchlist(res, userId)
+    }
+  }
+
+  useEffect(()=>{
+    fetchData()
+  },[])
 
   useEffect(() => {
     fetchproductData();
   }, []);
 
   useEffect(()=>{
-    loadWatchlist();
-  },[])
+    loadWatchlist();  },[])
 
   
-
   return (
     <div>
         <Header />
@@ -63,10 +79,7 @@ const Landing = () => {
               <h5 className="font-bold">{res.price}</h5>
             </div>
             <div className="flex justify-between py-3 px-4">
-              <button className="w-10 h-10 rounded-full border border-1 border-purple-600 flex items-center justify-center text-purple-600 hover:bg-purple-600 hover:text-white active:bg-purple-800 transition-colors " onClick={()=>addToWatchlist(res, userId)}  >
-
-              {/* <button  className={`w-10 h-10 rounded-full border border-1 border-purple-600 flex items-center justify-center text-purple-600 hover:bg-purple-600 hover:text-whitetransition-colors " onClick={()=>{addToWatchlist(res, userId); setLikedProductButton(true)}} ${likedProductButton ? "bg-green-500" : "bg-blue-500"
-                                         }`} > */}
+              <button className= {`w-10 h-10 rounded-full border border-1  flex items-center justify-center ${isInWatchlist (res.id) ? "bg-purple-600 text-white" : "border-purple-600 text-purple-600 hover:bg-purple-600 hover:text-white"} transition-colors`} onClick={()=>toggleWatchlist(res)}  >
 
                 <svg
                   xmlns="http://www.w3.org/2000/svg"

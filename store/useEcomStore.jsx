@@ -38,17 +38,22 @@ const useEcomStore = create((set) => ({
 
   addToWatchlist: (products, userId)=>set((state)=>{
     const updatedWatchlist = [...state.watchlist, {...products, userId}]
-
-
     
     localStorage.setItem("watchlist", JSON.stringify(updatedWatchlist))
     return {watchlist: updatedWatchlist}
   }),
 
   loadWatchlist: ()=>{
-    const storedWatchlist = JSON.parse(localStorage.getItem("watchlist" || []))
+    const storedWatchlist = JSON.parse(localStorage.getItem("watchlist")) || []
     set({watchlist: storedWatchlist})
-  }
+  },
+
+  removeFromWatchlist: (id) => set((state)=>{
+    const updatedWatchlist = state.watchlist.filter((item)=>item.id !== id)
+    localStorage.setItem("watchlist", JSON.stringify(updatedWatchlist))
+    return {watchlist: updatedWatchlist}
+  })
+
 
 
 }));

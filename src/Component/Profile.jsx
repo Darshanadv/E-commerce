@@ -53,7 +53,8 @@ const Profile = () => {
             <h2 className="text-xl mb-5">Your Profile</h2>
             <div className="mb-4">
               <input
-                placeholder="Your Name"
+                // placeholder="Your Name"
+                value = {userDetail?.username}
                 type="text"
                 name="name"
                 className="border-gray-300 focus:border-purple-500 focus:outline-none focus:ring-purple-500 rounded-md w-full"
@@ -64,13 +65,13 @@ const Profile = () => {
                 placeholder="Your Email"
                 type="email"
                 name="email"
-                value={userDetail?.email}
+                value= {userDetail?.email}
                 className="border-gray-300 focus:border-purple-500 focus:outline-none focus:ring-purple-500 rounded-md w-full"
               />
             </div>
             <div className="mb-4">
               <input
-                placeholder="Your Phone"
+              value = {userDetail?.phone}
                 type="text"
                 name="phone"
                 className="border-gray-300 focus:border-purple-500 focus:outline-none focus:ring-purple-500 rounded-md w-full"
@@ -102,7 +103,7 @@ const Profile = () => {
             <div className="flex gap-3">
               <div className="mb-4 flex-1">
                 <input
-                  placeholder="City"
+                  value ={userDetail?.address.city}
                   type="text"
                   name="billing_city"
                   className="border-gray-300 focus:border-purple-500 focus:outline-none focus:ring-purple-500 rounded-md w-full"
@@ -135,7 +136,7 @@ const Profile = () => {
               </div>
               <div className="mb-4 flex-1">
                 <input
-                  placeholder="Zipcode"
+                  value ={userDetail?.address.zipcode}
                   type="text"
                   name="billing_zipcode"
                   className="border-gray-300 focus:border-purple-500 focus:outline-none focus:ring-purple-500 rounded-md w-full"
@@ -178,7 +179,7 @@ const Profile = () => {
             <div className="flex gap-3">
               <div className="mb-4 flex-1">
                 <input
-                  placeholder="City"
+                  value ={userDetail?.address.city}
                   type="text"
                   name="shipping_city"
                   className="border-gray-300 focus:border-purple-500 focus:outline-none focus:ring-purple-500 rounded-md w-full"
@@ -211,7 +212,7 @@ const Profile = () => {
               </div>
               <div className="mb-4 flex-1">
                 <input
-                  placeholder="Zipcode"
+                  value ={userDetail?.address.zipcode}
                   type="text"
                   name="shipping_zipcode"
                   className="border-gray-300 focus:border-purple-500 focus:outline-none focus:ring-purple-500 rounded-md w-full"

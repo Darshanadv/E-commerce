@@ -47,7 +47,7 @@ const Header = () => {
                 className="block py-navbar-item px-navbar-item hover:bg-slate-900"
                 onClick={(e) => {
                   e.preventDefault(); 
-                  navigate("/landing"); 
+                  navigate("/category"); 
                 }}
               >
                 Categories
@@ -60,6 +60,10 @@ const Header = () => {
             <li>
               <a
                 href="/src/cart.html"
+                onClick={(e)=>{
+                    e.preventDefault();
+                    navigate("/cart")
+                }}
                 className="inline-flex items-center py-navbar-item px-navbar-item hover:bg-slate-900"
               >
                 <svg
@@ -205,6 +209,9 @@ const Header = () => {
                      onClick={(e) => {
                        e.preventDefault(); 
                        localStorage.clear();
+                      // localStorage.removeItem("Email");
+                      // localStorage.removeItem("Password");
+
                        navigate("/"); 
                      }}
                    >

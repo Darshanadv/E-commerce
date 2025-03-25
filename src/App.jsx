@@ -8,6 +8,9 @@ import Profile from "./Component/Profile";
 import Signup from "./Component/Signup";
 import Watchlist from "./Component/Watchlist";
 import Orders from "./Component/Orders";
+import Category from "./Component/Category";
+import Cart from "./Component/Cart";
+
 
 
 function App() {
@@ -33,6 +36,8 @@ function App() {
              <Route path= "/profile" element={<Profile />}/>
              <Route path= "/ordersdetail" element={<Ordersdetail />}/>
              <Route path= "/orders" element={<Orders />}/>
+             <Route path= "/category" element={<Category/>}/>
+             <Route path= "/cart" element={<Cart/>}/>
 
          
         </Routes>
