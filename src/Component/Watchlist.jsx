@@ -39,8 +39,6 @@ console.log(loggedinPersonDetail);
       {/* Product Item */}
 
 
-
-
       {loggedinPersonDetail.map((item)=>(
        
         <div key={item.id} className="flex flex-col sm:flex-row items-center gap-4"      >
