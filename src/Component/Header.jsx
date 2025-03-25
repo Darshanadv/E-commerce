@@ -208,9 +208,9 @@ const Header = () => {
                      className="flex px-3 py-2 hover:bg-slate-900"
                      onClick={(e) => {
                        e.preventDefault(); 
-                       localStorage.clear();
-                      // localStorage.removeItem("Email");
-                      // localStorage.removeItem("Password");
+                      //  localStorage.clear();
+                      localStorage.removeItem("Email");
+                      localStorage.removeItem("Password");
 
                        navigate("/"); 
                      }}

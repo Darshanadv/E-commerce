@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import Header from './Header'
 import useEcomStore from '../../store/useEcomStore'
 
@@ -6,9 +6,21 @@ const Cart = () => {
 
     const{watchlist, loadWatchlist, removeFromWatchlist} = useEcomStore()
 
+      const loggedinEmail = localStorage.getItem('Email');
+      
+    const [loggedinPersonDetail, setLoggedinPersonDetail] = useState([])
+    console.log(loggedinPersonDetail);
+
     useEffect(()=>{
         loadWatchlist()
     }, [])
+
+      useEffect(() => {
+        const matchedUsers = watchlist.filter((item) => loggedinEmail === item.userId);
+        
+        setLoggedinPersonDetail(matchedUsers); 
+      }, [watchlist, loggedinEmail]);
+     
 
   return (
     <>
@@ -22,7 +34,7 @@ const Cart = () => {
       <h1 className="text-3xl font-bold mb-6">Your Cart Items</h1>
       
 
-      {watchlist.map((item)=>(
+      {loggedinPersonDetail.map((item)=>(
 
 
     <div key={item.id} className="bg-white p-4 rounded-lg shadow">

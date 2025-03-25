@@ -7,13 +7,24 @@ const Watchlist = () => {
 
   const {loadWatchlist, watchlist, removeFromWatchlist} = useEcomStore();
 
+  const loggedinEmail = localStorage.getItem('Email');
+  
+const [loggedinPersonDetail, setLoggedinPersonDetail] = useState([])
+
+console.log(loggedinPersonDetail);
+
+
   useEffect(()=>{    
     loadWatchlist()
   },[])
-  
-  // const watchlistitems = localStorage.getItem("watchlist");
-  // console.log(watchlistitems);
-  
+
+
+  useEffect(() => {
+    const matchedUsers = watchlist.filter((item) => loggedinEmail === item.userId);
+    
+    setLoggedinPersonDetail(matchedUsers); 
+  }, [watchlist, loggedinEmail]);
+ 
 
   return (
     <>
@@ -27,8 +38,11 @@ const Watchlist = () => {
 
       {/* Product Item */}
 
-      {watchlist.map((item)=>(
-        
+
+
+
+      {loggedinPersonDetail.map((item)=>(
+       
         <div key={item.id} className="flex flex-col sm:flex-row items-center gap-4"      >
           <div>
             <img src={item.image} className="w-36 h-36 object-contain p-5" alt="" />                   {/* image fetched..*/} 
