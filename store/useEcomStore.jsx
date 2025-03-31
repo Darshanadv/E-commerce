@@ -36,8 +36,8 @@ const useEcomStore = create((set) => ({
     }
   },
 
-  addToWatchlist: (products, userId)=>set((state)=>{
-    const updatedWatchlist = [...state.watchlist, {...products, userId}]
+  addToWatchlist: (products, userId, orderingtime, quantity)=>set((state)=>{
+    const updatedWatchlist = [...state.watchlist, {...products, userId, orderingtime, quantity}]
     
     localStorage.setItem("watchlist", JSON.stringify(updatedWatchlist))
     return {watchlist: updatedWatchlist}

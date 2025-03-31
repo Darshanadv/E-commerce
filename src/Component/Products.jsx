@@ -4,7 +4,7 @@ import Header from './Header';
 
 const Products = () => {
 
-  const{fetchproductData,productData} = useEcomStore();
+  const{fetchproductData,productData, addToWatchlist, watchlist} = useEcomStore();
 
   const [productItem, setProductItem] = useState({});
   const clickedItem = localStorage.getItem("Clicked Item");
@@ -13,21 +13,62 @@ const Products = () => {
       fetchproductData();
     }, []);
   
-    // console.log(clickedItem);
-    // console.log(productData[1]);
-    // console.log(productData[productItem]);
-    // console.log(productItem);
+const checkWatchlist =()=>{             //function to check if selected product is already is in watchlist
+  watchlist.map((item)=>{
+    if(item.title==productItem.title){
+      console.log('product already in watchlist');
+    }
+})
+}
+
+//order timing functionality start.. //
+
+const [currentTime, setCurrentTime] = useState()
+const [currentMonth, setCurrentMonth] = useState()
+const [currentDate, setCurrentDate] = useState()
+
+
+function update(){
+  const months = ["January", "February", "March", "April", "May", "June", 
+    "July", "August", "September", "October", "November", "December"];
     
+  const currentDay = new Date();
+  const currentMonthInNumber = currentDay.getMonth();
+  
+  const currentHour = String(currentDay.getHours()).padStart(2, '0'); // Ensures 2-digit format
+  const currentMinute = String(currentDay.getMinutes()).padStart(2, '0');
+  
+  const currentTimefetched = `${currentHour}:${currentMinute}`;
+  const currentMonthfetched = months[currentMonthInNumber];
+  const currentDatefetched = currentDay.getDate();
+
+  setCurrentTime(currentTimefetched)
+  setCurrentMonth(currentMonthfetched)
+  setCurrentDate(currentDatefetched)
+}
+
+const displayTime = currentMonth +' '+ currentDate +','+ ' '+ currentTime ;
+const orderingtime = displayTime;
+
+useEffect(()=>{
+  update()
+},[])
+
+setInterval(() => {
+  update();
+}, 100);
+
+//order timing functionality End.. //
     
+
  useEffect(()=>{
     if(productData.length>0){
     
       if(clickedItem){
         const matchProduct = productData.find((user)=> user.id==clickedItem)
         if(matchProduct){                 //verify data as an object
-          console.log(matchProduct);     
+          // console.log(matchProduct);     
           setProductItem(matchProduct);  //setting the object's id
-          // setProductItem(matchProduct);
         }else{
           console.log("no match product");   
         }
@@ -36,21 +77,39 @@ const Products = () => {
   }, [productData])
 
 
-  // useEffect(()=>{
-  //         if(storedEmail&&storedPassword){
-  //           // return;
-  //           navigate("/products")
-  //         }else{
-  //           navigate("/")
-  //         }
-  //       },[])
+  const userId = localStorage.getItem('Email');
 
+  const toggleAddToCart = () => {
+    const btn = document.querySelector("#addToCart");
+    if (btn) {
+      btn.innerHTML = "Added";
+      btn.style.backgroundColor = "orange";
+    }
+  };
+  
+  const addToCart = () => {
+    console.log(productItem);
+    console.log(quantity);
+    
+  
+    toggleAddToCart(); // Call function to change button
+    setTimeout(() => {
+      const btn = document.querySelector("#addToCart");
+      if (btn) {
+        btn.innerHTML = "Add to Cart"; // Reset button text after 1 sec
+        btn.style.backgroundColor = ""; // Reset background color
+      }
+    }, 800); // Wait 1 second
+  
+    addToWatchlist(productItem, userId, orderingtime, quantity);
+  };
 
+  const[quantity, setQuantity] = useState(1);
+  
   return (
    <>
     <Header />
        <main className="p-5">
-      
         
        <div 
       
@@ -59,7 +118,7 @@ const Products = () => {
            <div className="col-span-3">
              <div className="aspect-square flex items-center">
              
-               <img src={productItem.image}alt="product image" className="h-96"/>  {/* product image fetched*/}
+               <img src={productItem.image}alt="product image" className="h-full"/>  {/* product image fetched*/}
                
              </div>
              
@@ -118,7 +177,7 @@ const Products = () => {
                      d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z"
                    />
                  </svg>
-                 <h3 className="text-2xl font-semibold">
+                 <h3 className="text-4xl font-semibold">
                 {productItem.rating?.rate}
                 </h3>
                </div>
@@ -127,9 +186,11 @@ const Products = () => {
                 
                 </div>
 
+                    {/* {Rating()} */}
+
                 <div>
-                <h3 className="text-xl font-semibold">
-                  {`Price: ${productItem.price}£` }
+                <h3 className="text-4xl font-semibold">
+                  {`Price: ${productItem.price*quantity}£` }
                 </h3>
                 </div>
                 </div>
@@ -141,18 +202,19 @@ const Products = () => {
                </a>
              
              <div className="flex items-center justify-between mb-10 p-3 rounded-xl bg-gray-200">
-               <label htmlFor="quantity" className="block font-bold mr-4 text-lg">
+               <label htmlFor="quantity" className="block font-bold mr-4 text-2xl">
                  Quantity
                </label>
                <input
                  type="number"
                  name="quantity"
-                 defaultValue={1}
+                 defaultValue={quantity}
                  className="w-32 h-10 focus:border-purple-500 focus:outline-none rounded text-lg bg-white px-5"
+                 onChange={(e)=>setQuantity(e.target.value)}
                />
              </div>
              <div className="flex justify-center">
-             <button className="btn-primary py-4 text-lg flex justify-center min-w-0 w-48 rounded-xl mb-6 scale-125 bg-green-400">
+             <button className="btn-primary py-4 text-lg flex justify-center min-w-0 w-48 rounded-xl mb-6 scale-125 bg-green-400" id='addToCart'  onClick={addToCart}>
                <svg
                  xmlns="http://www.w3.org/2000/svg"
                  className="h-6 w-6 mr-2"
@@ -171,33 +233,9 @@ const Products = () => {
              </button>
              </div>
              
-             <div className="text-gray-500 mb-6 wysiwyg-content">
-               <table>
-                 {/* <tbody>
-                   <tr>
-                     <td>Connectivity Technology</td>
-                     <td>USB</td>
-                   </tr>
-                   <tr>
-                     <td>Recommended Uses For Product</td>
-                     <td>Gaming</td>
-                   </tr>
-                   <tr>
-                     <td>Brand</td>
-                     <td>Logitech G</td>
-                   </tr>
-                   <tr>
-                     <td>Compatible Devices</td>
-                     <td>Personal Computer</td>
-                   </tr>
-                   <tr>
-                     <td>Series</td>
-                     <td>Logitech G502 HERO High Performance Gaming Mouse</td>
-                   </tr>
-                 </tbody> */}
-               </table>
-               <p className="block font-bold mr-4">Description : </p>
-               <p className="">
+             <div className="text-gray-500 mb-6 wysiwyg-content text-4xl">
+               <p className="block font-bold mr-4 mb-5 ">Description : </p>
+               <p className="text-2xl">
                 {productItem.description}
                </p>
              </div>

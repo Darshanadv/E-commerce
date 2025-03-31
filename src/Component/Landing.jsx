@@ -15,18 +15,61 @@ const Landing = () => {
   // const userId = "user1"
   const userId = localStorage.getItem('Email');
 
+
+//order timing functionality start.. //
+
+const [currentTime, setCurrentTime] = useState()
+const [currentMonth, setCurrentMonth] = useState()
+const [currentDate, setCurrentDate] = useState()
+
+
+function update(){
+  const months = ["January", "February", "March", "April", "May", "June", 
+    "July", "August", "September", "October", "November", "December"];
+    
+  const currentDay = new Date();
+  const currentMonthInNumber = currentDay.getMonth();
+  
+  const currentHour = String(currentDay.getHours()).padStart(2, '0'); // Ensures 2-digit format
+  const currentMinute = String(currentDay.getMinutes()).padStart(2, '0');
+  
+  const currentTimefetched = `${currentHour}:${currentMinute}`;
+  const currentMonthfetched = months[currentMonthInNumber];
+  const currentDatefetched = currentDay.getDate();
+
+  setCurrentTime(currentTimefetched)
+  setCurrentMonth(currentMonthfetched)
+  setCurrentDate(currentDatefetched)
+}
+
+const displayTime = currentMonth +' '+ currentDate +','+ ' '+ currentTime ;
+const orderingtime = displayTime;
+
+useEffect(()=>{
+  update()
+},[])
+
+setInterval(() => {
+  update();
+}, 100);
+
+//order timing functionality End.. //
+
+
+  const matchedUsers = watchlist.filter((item) => userId === item.userId);
+
   
   // const loggedinUserId =()=> data.some((i) => i.email === loggedinUserEmail)
 
-  const isInWatchlist = (id)=> watchlist.some((item)=> item.id === id)
-
+  const isInWatchlist = (id)=> matchedUsers.some((item)=> item.id === id)
+  
   const toggleWatchlist = (res) =>{
 
 
     if(isInWatchlist (res.id)){
       removeFromWatchlist(res.id);
     }else{
-      addToWatchlist(res, userId)
+      addToWatchlist(res, userId, orderingtime)
     }
   }
 

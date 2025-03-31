@@ -11,6 +11,9 @@ const Cart = () => {
     const [loggedinPersonDetail, setLoggedinPersonDetail] = useState([])
     console.log(loggedinPersonDetail);
 
+    console.log(watchlist);
+    
+
     useEffect(()=>{
         loadWatchlist()
     }, [])
@@ -20,14 +23,12 @@ const Cart = () => {
         
         setLoggedinPersonDetail(matchedUsers); 
       }, [watchlist, loggedinEmail]);
-     
+
 
   return (
     <>
 
  <Header />
-
-
 
   <main className="p-5">
     <div className="container lg:w-2/3 xl:w-2/3 mx-auto">
@@ -46,7 +47,7 @@ const Cart = () => {
         <div className="flex flex-col justify-between">
           <div className="flex justify-between mb-3">
            {<h3>{item.description}</h3>}
-            <span className="text-lg font-semibold"> ${item.price} </span>
+            <span className="text-lg font-semibold"> ${(item.price * (item.quantity || 1)).toFixed(2)} </span>
           </div>
           <div className="flex justify-between items-center">
             <div className="flex items-center">

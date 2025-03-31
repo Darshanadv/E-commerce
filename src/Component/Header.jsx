@@ -32,7 +32,7 @@ const Header = () => {
             <li>
               <a
                 href="/src/index.html"
-                className="block py-navbar-item px-navbar-item hover:bg-slate-900"
+                className="block py-navbar-item px-navbar-item hover:bg-slate-900 text-3xl"
                 onClick={(e) => {
                   e.preventDefault(); 
                   navigate("/landing"); 
@@ -44,7 +44,7 @@ const Header = () => {
             <li>
               <a
                 href="#"
-                className="block py-navbar-item px-navbar-item hover:bg-slate-900"
+                className="block py-navbar-item px-navbar-item hover:bg-slate-900 text-3xl"
                 onClick={(e) => {
                   e.preventDefault(); 
                   navigate("/category"); 
@@ -64,7 +64,7 @@ const Header = () => {
                     e.preventDefault();
                     navigate("/cart")
                 }}
-                className="inline-flex items-center py-navbar-item px-navbar-item hover:bg-slate-900"
+                className="inline-flex items-center py-navbar-item px-navbar-item hover:bg-slate-900 text-3xl"
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -87,7 +87,7 @@ const Header = () => {
               <a
                 href="#"
                 onClick={dropdownMyaccount}
-                className="flex items-center py-navbar-item px-navbar-item pr-5 hover:bg-slate-900"
+                className="flex items-center py-navbar-item px-navbar-item pr-5 hover:bg-slate-900 text-3xl"
               >
                 <span className="flex items-center">
                   <svg
@@ -127,7 +127,7 @@ const Header = () => {
                  <li>
                    <a
                      href="/profile"
-                     className="flex px-3 py-2 hover:bg-slate-900"
+                     className="flex px-3 py-2 hover:bg-slate-900 text-2xl"
                      onClick={(e) => {
                        e.preventDefault(); 
                        navigate("/profile"); 
@@ -153,7 +153,7 @@ const Header = () => {
                  <li>
                    <a
                      href="/watchlist"
-                     className="flex items-center px-3 py-2 hover:bg-slate-900"
+                     className="flex items-center px-3 py-2 hover:bg-slate-900 text-2xl"
                      onClick={(e) => {
                        e.preventDefault(); 
                        navigate("/watchlist"); 
@@ -179,7 +179,7 @@ const Header = () => {
                  <li>
                    <a
                      href="/orders"
-                     className="flex px-3 py-2 hover:bg-slate-900"
+                     className="flex px-3 py-2 hover:bg-slate-900 text-2xl"
                      onClick={(e) => {
                        e.preventDefault(); 
                        navigate("/orders"); 
@@ -205,7 +205,7 @@ const Header = () => {
                  <li>
                    <a
                      href="/src/logout.html"
-                     className="flex px-3 py-2 hover:bg-slate-900"
+                     className="flex px-3 py-2 hover:bg-slate-900 text-2xl"
                      onClick={(e) => {
                        e.preventDefault(); 
                       //  localStorage.clear();
