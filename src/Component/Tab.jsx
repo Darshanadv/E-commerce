@@ -59,12 +59,15 @@ export function Tab({ children, activeTab, currentTab, setActiveTab }) {
 
    useEffect(()=>{
       fetchproductData();
-      console.log(productData);
-      
     },[])
 
   const[categoryList, setCategoryList] = useState([])
   const matchedCategoryItems = productData.filter((item) => children === item.category);
+  
+  const electronics = "electronics"
+  const defaultCategoryItems = matchedCategoryItems.filter((item)=>item.category === electronics)
+  console.log(defaultCategoryItems);
+  
 
   const categoryItem = () => {
     setActiveTab(currentTab);
@@ -87,14 +90,15 @@ export function Tab({ children, activeTab, currentTab, setActiveTab }) {
         {children} 
       </div>
 
-    <ul>
-      {categoryList?.map((item, id)=>(
-        <li key={id}>{item.title}</li>
-      ))}
-    </ul>
-
+      <ul>
+  {categoryList?.length > 0 ? (
+    categoryList.map((item, id) => <li key={id}>{item.title}</li>)
+  ) : (
+    <li>{defaultCategoryItems?.map((item,id)=>( <li key={id}>{item.title}</li>
+      ))}</li>
+  )}
+  </ul>
     </>
-    
   );
 
 }

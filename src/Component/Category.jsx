@@ -15,6 +15,8 @@ const Category = () => {
     fetchproductData();
   },[])
 
+  
+
   useEffect(()=>{
     axios.get("https://fakestoreapi.com/products/categories")
     .then((res)=>{
@@ -25,12 +27,8 @@ const Category = () => {
     console.log(error)
   })
   }, []) 
-
-  // console.log(category);
-  // console.log(productData);
   
-
-
+  
   return (
     
     <div>
