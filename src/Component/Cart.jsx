@@ -32,7 +32,12 @@ const Cart = () => {
 
   <main className="p-5">
     <div className="container lg:w-2/3 xl:w-2/3 mx-auto">
-      <h1 className="text-3xl font-bold mb-6">Your Cart Items</h1>
+    <div className='flex justify-between'>
+    <h1 className="text-3xl font-bold mb-6">Your Cart Items</h1>
+      <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full">
+           Add to Your Order
+        </button>
+    </div>
       
 
       {loggedinPersonDetail.map((item)=>(

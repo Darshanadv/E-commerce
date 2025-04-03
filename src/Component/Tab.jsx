@@ -66,7 +66,7 @@ export function Tab({ children, activeTab, currentTab, setActiveTab }) {
   
   const electronics = "electronics"
   const defaultCategoryItems = matchedCategoryItems.filter((item)=>item.category === electronics)
-  console.log(defaultCategoryItems);
+  // console.log(defaultCategoryItems);
   
 
   const categoryItem = () => {
