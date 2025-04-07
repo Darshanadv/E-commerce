@@ -22,6 +22,7 @@ const Header = () => {
           <a
             href="https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.cleanpng.com%2Fpng-e-commerce-logo-electronic-business-2257218%2F&psig=AOvVaw0VQcpogFdaZu6axQNBjOxQ&ust=1742398024522000&source=images&cd=vfe&opi=89978449&ved=0CBQQjRxqFwoTCID36cz4k4wDFQAAAAAdAAAAABAE"
             className="block py-navbar-item pl-5 w-[3cm] "
+            onClick={(e) => e.preventDefault()}
           >
             {/* {" "}logo */}
             <img src="./images/logo.png" alt="" />{" "}

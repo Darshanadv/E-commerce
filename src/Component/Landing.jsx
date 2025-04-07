@@ -16,46 +16,6 @@ const Landing = () => {
   const userId = localStorage.getItem('Email');
 
 
-//order timing functionality start.. //
-
-const [currentTime, setCurrentTime] = useState()
-const [currentMonth, setCurrentMonth] = useState()
-const [currentDate, setCurrentDate] = useState()
-
-
-function update(){
-  const months = ["January", "February", "March", "April", "May", "June", 
-    "July", "August", "September", "October", "November", "December"];
-    
-  const currentDay = new Date();
-  const currentMonthInNumber = currentDay.getMonth();
-  
-  const currentHour = String(currentDay.getHours()).padStart(2, '0'); // Ensures 2-digit format
-  const currentMinute = String(currentDay.getMinutes()).padStart(2, '0');
-  
-  const currentTimefetched = `${currentHour}:${currentMinute}`;
-  const currentMonthfetched = months[currentMonthInNumber];
-  const currentDatefetched = currentDay.getDate();
-
-  setCurrentTime(currentTimefetched)
-  setCurrentMonth(currentMonthfetched)
-  setCurrentDate(currentDatefetched)
-}
-
-const displayTime = currentMonth +' '+ currentDate +','+ ' '+ currentTime ;
-const orderingtime = displayTime;
-
-useEffect(()=>{
-  update()
-},[])
-
-setInterval(() => {
-  update();
-}, 100);
-
-//order timing functionality End.. //
-
-
   const matchedUsers = watchlist.filter((item) => userId === item.userId);
 
   
@@ -69,7 +29,7 @@ setInterval(() => {
     if(isInWatchlist (res.id)){
       removeFromWatchlist(res.id);
     }else{
-      addToWatchlist(res, userId, orderingtime)
+      addToWatchlist(res, userId)
     }
   }
 
@@ -119,7 +79,7 @@ setInterval(() => {
                   {res.title || "no description"}
                 </a>
               </h3>
-              <h5 className="font-bold">{res.price}</h5>
+              <h5 className="font-bold">£{res.price}</h5>
             </div>
             <div className="flex justify-between py-3 px-4">
               <button className= {`w-10 h-10 rounded-full border border-1  flex items-center justify-center ${isInWatchlist (res.id) ? "bg-purple-600 text-white" : "border-purple-600 text-purple-600 hover:bg-purple-600 hover:text-white"} transition-colors`} onClick={()=>toggleWatchlist(res)}  >

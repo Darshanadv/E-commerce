@@ -51,7 +51,7 @@ console.log(loggedinPersonDetail);
             <h3>
               {item.title}                                                {/* title fetched..*/} 
             </h3>
-            <span className="text-lg font-semibold"> {item.price} </span> {/* price fetched..*/} 
+            <span className="text-lg font-semibold"> £{item.price} </span> {/* price fetched..*/} 
           </div>
           <div className="flex justify-start items-center">
             <button className="text-purple-600 hover:text-purple-500" 

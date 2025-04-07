@@ -8,7 +8,10 @@ const useEcomStore = create((set) => ({
 
   productData: [],
   watchlist: [],
- 
+
+  //to handle seperate for order
+  myOrder: [],
+  currentUserData: {},
 
   fetchData: async () => {
     set({ loading: true, error: null });
@@ -36,26 +39,71 @@ const useEcomStore = create((set) => ({
     }
   },
 
-  addToWatchlist: (products, userId, orderingtime, quantity, abc, allCartItemOrderTime)=>set((state)=>{
-    const updatedWatchlist = [...state.watchlist, {...products, userId, orderingtime, quantity, abc, allCartItemOrderTime}]
-    
-    localStorage.setItem("watchlist", JSON.stringify(updatedWatchlist))
-    return {watchlist: updatedWatchlist}
-  }),
+  addToWatchlist: (
+    products,
+    userId,
+    orderingtime,
+    quantity,
+    allCartItemOrderTime
+  ) =>
+    set((state) => {
+      const updatedWatchlist = [
+        ...state.watchlist,
+        {
+          ...products,
+          userId,
+          orderingtime,
+          quantity,
+          allCartItemOrderTime,
+        },
+      ];
 
-  loadWatchlist: ()=>{
-    const storedWatchlist = JSON.parse(localStorage.getItem("watchlist")) || []
-    set({watchlist: storedWatchlist})
+      localStorage.setItem("watchlist", JSON.stringify(updatedWatchlist));
+      return { watchlist: updatedWatchlist };
+    }),
+
+  loadWatchlist: () => {
+    const storedWatchlist = JSON.parse(localStorage.getItem("watchlist")) || [];
+    const storeCurrentUserData =
+      JSON.parse(localStorage.getItem("currentUserData")) || [];
+    const getMyOrder = JSON.parse(localStorage.getItem("myOrder")) || [];
+    set({
+      watchlist: storedWatchlist,
+      currentUserData: storeCurrentUserData,
+      myOrder: getMyOrder,
+    });
   },
 
-  removeFromWatchlist: (id) => set((state)=>{
-    const updatedWatchlist = state.watchlist.filter((item)=>item.id !== id)
-    localStorage.setItem("watchlist", JSON.stringify(updatedWatchlist))
-    return {watchlist: updatedWatchlist}
-  })
+  removeFromWatchlist: (id) =>
+    set((state) => {
+      const updatedWatchlist = state.watchlist.filter((item) => item.id !== id);
+      localStorage.setItem("watchlist", JSON.stringify(updatedWatchlist));
+      return { watchlist: updatedWatchlist };
+    }),
 
+  // to add data in my order page
+  addToMyOrder: (newData) =>
+    set((state) => {
+      const updatedOrder = [...state.myOrder, newData];
+      localStorage.setItem("myOrder", JSON.stringify(updatedOrder));
+      return { myOrder: updatedOrder };
+    }),
 
+  // to remove all from cart after sending to my order
+  removeAllFromWashList: (id) =>
+    set((state) => {
+      const updatedWatchlist = state?.watchlist?.filter(
+        (item) => item.userId !== id
+      );
+      localStorage.setItem("watchlist", JSON.stringify(updatedWatchlist));
+      return { watchlist: [] };
+    }),
 
+  getCurrentUserData: (data) =>
+    set((state) => {
+      localStorage.setItem("currentUserData", JSON.stringify(data));
+      return { currentUserData: data };
+    }),
 }));
 
 export default useEcomStore;
