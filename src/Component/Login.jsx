@@ -15,49 +15,14 @@ const Login = () => {
 
   const navigate = useNavigate();
 
-  // const handleClick=()=>{
-  //   console.log('before..');
-
-  //   navigate("/landing")
-  //   console.log("after...");
-
-  // }
-
   useEffect(() => {
     fetchData();
   }, [fetchData]);
 
-  // console.log(checkIn)
 
-  // const login = () => {
-
-  //   const user = data.find((user)=>user.email === email && user.password === password)
-  //  console.log(user);
-
-  //   console.log(checkIn);
-
-  //     if (user) {
-  //       setCredentialMessage(true);
-
-  //       if(checkIn){
-  //         localStorage.setItem('Email',email);
-  //         localStorage.setItem('Password',password)
-  //       }
-
-  //       handleClick();
-  //       // setTimeout(()=>handleClick,1000)
-
-  //     } else {
-  //       setCredentialMessage(false);
-  //       console.log("credential do not match");
-
-  //     }
-
-  // };
 
   useEffect(() => {
     if (storedEmail && storedPassword) {
-      // return;
       navigate("/landing");
     } else {
       navigate("/");

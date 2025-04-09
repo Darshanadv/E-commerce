@@ -8,18 +8,14 @@ const Landing = () => {
   const { productData,fetchproductData,addToWatchlist,loadWatchlist, watchlist,removeFromWatchlist,data,fetchData } = useEcomStore();
   const navigate = useNavigate()
 
-  // const[likedProductButton, setLikedProductButton] = useState(false);
   const[clickedItemId, setclickedItemId] = useState("");
+  const[addToCart, setAddToCart] = useState("Add to Cart")
 
 
-  // const userId = "user1"
   const userId = localStorage.getItem('Email');
 
 
   const matchedUsers = watchlist.filter((item) => userId === item.userId);
-
-  
-  // const loggedinUserId =()=> data.some((i) => i.email === loggedinUserEmail)
 
   const isInWatchlist = (id)=> matchedUsers.some((item)=> item.id === id)
   
@@ -81,8 +77,8 @@ const Landing = () => {
               </h3>
               <h5 className="font-bold">£{res.price}</h5>
             </div>
-            <div className="flex justify-between py-3 px-4">
-              <button className= {`w-10 h-10 rounded-full border border-1  flex items-center justify-center ${isInWatchlist (res.id) ? "bg-purple-600 text-white" : "border-purple-600 text-purple-600 hover:bg-purple-600 hover:text-white"} transition-colors`} onClick={()=>toggleWatchlist(res)}  >
+            <div className="flex justify-between py-3 px-4" onClick={()=>toggleWatchlist(res)}>
+              <button className= {`w-10 h-10 rounded-full border border-1  flex items-center justify-center ${isInWatchlist (res.id) ? "bg-purple-600 text-white" : "border-purple-600 text-purple-600 hover:bg-purple-600 hover:text-white"} transition-colors`}  >
 
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -99,7 +95,7 @@ const Landing = () => {
                   />
                 </svg>
               </button>
-              <button className="btn-primary">Add to Cart</button>
+              <button className="btn-primary">{addToCart}</button>
             </div>
           </div>
         ))}

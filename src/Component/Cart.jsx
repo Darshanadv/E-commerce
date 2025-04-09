@@ -15,6 +15,57 @@ const Cart = () => {
   } = useEcomStore();
   const navigate = useNavigate();
 
+  //order timing functionality : start //
+
+  const [currentTime, setCurrentTime] = useState();
+  const [currentMonth, setCurrentMonth] = useState();
+  const [currentDate, setCurrentDate] = useState();
+
+  function update() {
+    const months = [
+      "January",
+      "February",
+      "March",
+      "April",
+      "May",
+      "June",
+      "July",
+      "August",
+      "September",
+      "October",
+      "November",
+      "December",
+    ];
+
+    const currentDay = new Date();
+    const currentMonthInNumber = currentDay.getMonth();
+
+    const currentHour = String(currentDay.getHours()).padStart(2, "0"); // Ensures 2-digit format
+    const currentMinute = String(currentDay.getMinutes()).padStart(2, "0");
+
+    const currentTimefetched = `${currentHour}:${currentMinute}`;
+    const currentMonthfetched = months[currentMonthInNumber];
+    const currentDatefetched = currentDay.getDate();
+
+    setCurrentTime(currentTimefetched);
+    setCurrentMonth(currentMonthfetched);
+    setCurrentDate(currentDatefetched);
+  }
+
+  const displayTime =
+    currentMonth + " " + currentDate + "," + " " + currentTime;
+  const orderingtime = displayTime;
+
+  useEffect(() => {
+    update();
+  }, []);
+
+  setInterval(() => {
+    update();
+  }, 100);
+
+  //order timing functionality : End //
+
   const loggedinEmail = localStorage.getItem("Email");
   const [cartsData, setCartsData] = useState();
   const [loggedinPersonDetail, setLoggedinPersonDetail] = useState([]);
@@ -27,7 +78,6 @@ const Cart = () => {
     setLoggedinPersonDetail(matchedUsers);
   }, [watchlist, loggedinEmail]);
 
-  // THIS function created by vastav just for your reference
   const handleOnAddOrder = () => {
     // first sum of all price then multiple with qty
     const filterData = cartsData?.reduce(
@@ -35,21 +85,25 @@ const Cart = () => {
       0
     );
 
-    // after sum create new object which we need send to my order page for view
+    console.log(filterData);
+
+    // after sum, a new object created to sent to my order page for view
     const newData = {
       userId: currentUserData?.id,
       totalPrice: filterData,
-      todayData: new Date(),
+      todayData: orderingtime,
     };
 
-    // this is new function created for separad order handing
-    addToMyOrder(newData);
+    if (filterData !== null && filterData !== undefined && filterData !== 0) {
+      addToMyOrder(newData);
+    } else {
+      preventDefault();
+    }
 
     //naviagte to order
     navigate("/orders");
     let userID = currentUserData?.id;
-    // this is new funcion created for after navigate remove all data from cart
-    removeAllFromWashList(userID);
+    removeAllFromWashList(userID); // remove all data from cart after navigate
   };
 
   useEffect(() => {
@@ -103,7 +157,7 @@ const Cart = () => {
                     </div>
                     <div className="flex justify-between items-center">
                       <div className="flex items-center">
-                        Qty:{item.quantity?item.quantity:1}
+                        Qty:{item.quantity ? item.quantity : 1}
                         {/* <select
                           name=""
                           id=""

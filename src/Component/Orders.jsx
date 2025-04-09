@@ -47,14 +47,8 @@ const Orders = () => {
             <table className="table table-auto w-full">
               <thead className="border-b-2">
                 <tr className="text-left">
-                  {/* <th>Order</th>
-                  <th>Date</th>
-                  <th>Status</th>
-                  <th>Total</th>
-                  <th className="w-64">Actions</th> */}
                   <th>Id</th>
                   <th>Order date</th>
-                  <th>Status</th>
                   <th>Total price</th>
                 </tr>
               </thead>
@@ -69,15 +63,15 @@ const Orders = () => {
                         {index + 1}
                       </a>
                     </td>
-                    <td>{new Date(item?.todayData).toLocaleDateString()}</td>
-                    <td>
+                    <td>{item?.todayData}</td>
+                    {/* <td>
                       <span className="bg-gray-500 text-white p-1 rounded">
                         Unpaid
                       </span>
-                    </td>
-                    <td>${item?.totalPrice?.toFixed(2)}</td>
+                    </td> */}
+                    <td>£{item?.totalPrice?.toFixed(2)}</td>
                     <td className="flex gap-3">
-                      <button className="btn-primary bg-emerald-500 hover:bg-emerald-600 active:bg-emerald-700 py-1 px-2 flex items-center">
+                      {/* <button className="btn-primary bg-emerald-500 hover:bg-emerald-600 active:bg-emerald-700 py-1 px-2 flex items-center">
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
                           className="h-5 w-5 mr-1"
@@ -110,7 +104,7 @@ const Orders = () => {
                           />
                         </svg>
                         Pay
-                      </button>
+                      </button> */}
                     </td>
                   </tr>
                 </tbody>

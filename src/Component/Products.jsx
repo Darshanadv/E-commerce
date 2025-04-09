@@ -86,7 +86,6 @@ const Products = () => {
         const matchProduct = productData.find((user) => user.id == clickedItem);
         if (matchProduct) {
           //verify data as an object
-          // console.log(matchProduct);
           setProductItem(matchProduct); //setting the object's id
         } else {
           console.log("no match product");
@@ -141,17 +140,17 @@ const Products = () => {
                 {productItem.title}
               </h1>
 
-              {/* <div className="text-xl font-bold mb-6">{productItem.title}</div> */}
+    
               <div className="flex items-center mb-6 justify-between">
                 <div className="flex items-center">
                   {[1, 2, 3, 4, 5].map((star) => (
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
-                      className={`h-6 w-6 ${
-                        productItem.rating?.rate >= star
-                          ? "text-orange-400"
-                          : "text-orange-100"
-                      }`}
+                      className={`h-6 w-6 `}
+                      style={{
+                        color: productItem.rating?.rate >= star ? "orange" : "#d3d3d3"
+                      }}
+                      
                       viewBox="0 0 20 20"
                       fill="currentColor"
                     >

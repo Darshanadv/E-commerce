@@ -21,58 +21,6 @@ const Category = () => {
     fetchproductData();
   }, []);
 
-
-    //order timing functionality start.. //
-  
-    const [currentTime, setCurrentTime] = useState();
-    const [currentMonth, setCurrentMonth] = useState();
-    const [currentDate, setCurrentDate] = useState();
-  
-    function update() {
-      const months = [
-        "January",
-        "February",
-        "March",
-        "April",
-        "May",
-        "June",
-        "July",
-        "August",
-        "September",
-        "October",
-        "November",
-        "December",
-      ];
-  
-      const currentDay = new Date();
-      const currentMonthInNumber = currentDay.getMonth();
-  
-      const currentHour = String(currentDay.getHours()).padStart(2, "0"); // Ensures 2-digit format
-      const currentMinute = String(currentDay.getMinutes()).padStart(2, "0");
-  
-      const currentTimefetched = `${currentHour}:${currentMinute}`;
-      const currentMonthfetched = months[currentMonthInNumber];
-      const currentDatefetched = currentDay.getDate();
-  
-      setCurrentTime(currentTimefetched);
-      setCurrentMonth(currentMonthfetched);
-      setCurrentDate(currentDatefetched);
-    }
-  
-    const displayTime =
-      currentMonth + " " + currentDate + "," + " " + currentTime;
-    const orderingtime = displayTime;
-  
-    useEffect(() => {
-      update();
-    }, []);
-  
-    setInterval(() => {
-      update();
-    }, 100);
-  
-    //order timing functionality End.. //
-
   useEffect(() => {
     if (productData?.length > 0) {
       const title = [...new Set(productData.map((obj) => obj?.category))];
@@ -94,18 +42,14 @@ const Category = () => {
     (item) => currentUserData?.id === item.userId
   );
 
-  // const loggedinUserId =()=> data.some((i) => i.email === loggedinUserEmail)
-
   const isInWatchlist = (id) => matchedUsers.some((item) => item.id === id);
 
   const toggleWatchlist = (res) => {
-    
     if (isInWatchlist(res.id)) {
       removeFromWatchlist(res.id);
     } else {
       let userId = currentUserData?.id;
-      // let orderingtime = new Date();
-      addToWatchlist(res, userId, orderingtime);
+      addToWatchlist(res, userId);
     }
   };
   return (
@@ -153,7 +97,7 @@ const Category = () => {
                     {res.title || "no description"}
                   </a>
                 </h3>
-                <h5 className="font-bold">{res.price}</h5>
+                <h5 className="font-bold">£{res.price}</h5>
               </div>
               <div className="flex justify-between py-3 px-4">
                 {/* <button

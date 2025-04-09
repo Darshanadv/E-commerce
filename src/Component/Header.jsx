@@ -15,7 +15,6 @@ const Header = () => {
   };
 
   return (
-    // <link rel="stylesheet" href="./images/logo.png" />
     <>
       <header className="flex justify-between bg-slate-800 shadow-md text-white items-center">
         <div>
@@ -24,7 +23,6 @@ const Header = () => {
             className="block py-navbar-item pl-5 w-[3cm] "
             onClick={(e) => e.preventDefault()}
           >
-            {/* {" "}logo */}
             <img src="./images/logo.png" alt="" />{" "}
           </a>
         </div>
@@ -208,7 +206,6 @@ const Header = () => {
                       className="flex px-3 py-2 hover:bg-slate-900 text-1xl"
                       onClick={(e) => {
                         e.preventDefault();
-                        //  localStorage.clear();
                         localStorage.removeItem("Email");
                         localStorage.removeItem("Password");
 
