@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import logo from "./../image/logo.png";
 
 const Header = () => {
   const navigate = useNavigate();
@@ -7,11 +8,7 @@ const Header = () => {
   const [myAccount, setMyAccount] = useState(false);
 
   const dropdownMyaccount = () => {
-    if (myAccount == false) {
-      setMyAccount(true);
-    } else if (myAccount == true) {
-      setMyAccount(false);
-    }
+    setMyAccount(!myAccount);
   };
 
   return (
@@ -23,7 +20,7 @@ const Header = () => {
             className="block py-navbar-item pl-5 w-[3cm] "
             onClick={(e) => e.preventDefault()}
           >
-            <img src="/src/image/logo.png" alt="Logo" />{" "}
+            <img src={logo} alt="Logo" />{" "}
           </a>
         </div>
         <nav className="hidden md:block ">
