@@ -6,9 +6,6 @@ const Ordersdetail = () => {
     <>
 
     <Header />
-  {/* <meta charSet="UTF-8" /> */}
-  {/* <meta name="viewport" content="width=device-width, initial-scale=1.0" /> */}
-  {/* <link href="/dist/output.css" rel="stylesheet" /> */}
 
   <main className="p-5">
     <div className="container lg:w-2/3 xl:w-2/3 mx-auto">

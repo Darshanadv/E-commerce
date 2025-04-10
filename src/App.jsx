@@ -1,4 +1,9 @@
-import { Route, Routes, BrowserRouter as Router, Navigate } from "react-router-dom";
+import {
+  Route,
+  Routes,
+  BrowserRouter as Router,
+  Navigate,
+} from "react-router-dom";
 import Login from "./Component/Login";
 import Landing from "./Component/Landing";
 import { useEffect, useState } from "react";
@@ -10,8 +15,6 @@ import Watchlist from "./Component/Watchlist";
 import Orders from "./Component/Orders";
 import Category from "./Component/Category";
 import Cart from "./Component/Cart";
-
-
 
 function App() {
   const [credentialData, setCredentialData] = useState(false);
@@ -27,22 +30,18 @@ function App() {
     <>
       <Router>
         <Routes>
-          
-            <Route path= "/" element={<Login />}/>
-            <Route path= "/landing" element={<Landing />}/>
-            <Route path= "/signup" element={<Signup />}/>
-            <Route path= "/watchlist" element={<Watchlist />}/>
-             <Route path= "/products" element={<Products />}/>
-             <Route path= "/profile" element={<Profile />}/>
-             <Route path= "/ordersdetail" element={<Ordersdetail />}/>
-             <Route path= "/orders" element={<Orders />}/>
-             <Route path= "/category" element={<Category/>}/>
-             <Route path= "/cart" element={<Cart/>}/>
-
-         
+          <Route path="/" element={<Login />} />
+          <Route path="/landing" element={<Landing />} />
+          <Route path="/signup" element={<Signup />} />
+          <Route path="/watchlist" element={<Watchlist />} />
+          <Route path="/products" element={<Products />} />
+          <Route path="/profile" element={<Profile />} />
+          <Route path="/ordersdetail" element={<Ordersdetail />} />
+          <Route path="/orders" element={<Orders />} />
+          <Route path="/category" element={<Category />} />
+          <Route path="/cart" element={<Cart />} />
         </Routes>
       </Router>
-
     </>
   );
 }

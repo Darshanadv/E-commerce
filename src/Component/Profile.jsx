@@ -29,7 +29,7 @@ const Profile = () => {
       <Header />
 
       {data.map((res) => (
-        <div key={res.id}>{/* {console.log(res.email)} */}</div>
+        <div key={res.id}></div>
       ))}
 
       <main className="p-5">
@@ -72,7 +72,8 @@ const Profile = () => {
                 <div className="flex gap-3">
                   <div className="mb-4 flex-1">
                     <input
-                      placeholder="Address 1"
+                      value={userDetail?.address.zipcode}
+                      // placeholder="Address 1"
                       type="text"
                       name="billing_address_1"
                       className="border-gray-300 focus:border-purple-500 focus:outline-none focus:ring-purple-500 rounded-md w-full"
@@ -80,7 +81,7 @@ const Profile = () => {
                   </div>
                   <div className="mb-4 flex-1">
                     <input
-                      placeholder="Address 2"
+                      value={userDetail?.address.street}
                       type="text"
                       name="billing_address_2"
                       className="border-gray-300 focus:border-purple-500 focus:outline-none focus:ring-purple-500 rounded-md w-full"
@@ -131,8 +132,7 @@ const Profile = () => {
                   </div>
                 </div>
               </div>
-              {/*/ Billing Address */}
-              {/* Shipping Address */}
+
               <div className="mb-6">
                 <div className="flex items-center justify-between mb-5">
                   <h2 className="text-xl">Shipping Address</h2>

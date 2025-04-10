@@ -1,68 +1,71 @@
 import React, { useEffect, useState } from "react";
 import useEcomStore from "../../store/useEcomStore";
-import Header from "./Header"
-import {useNavigate } from "react-router-dom";
-
+import Header from "./Header";
+import { useNavigate } from "react-router-dom";
 
 const Landing = () => {
-  const { productData,fetchproductData,addToWatchlist,loadWatchlist, watchlist,removeFromWatchlist,data,fetchData } = useEcomStore();
-  const navigate = useNavigate()
+  const {
+    productData,
+    fetchproductData,
+    addToWatchlist,
+    loadWatchlist,
+    watchlist,
+    removeFromWatchlist,
+    data,
+    fetchData,
+  } = useEcomStore();
+  const navigate = useNavigate();
 
-  const[clickedItemId, setclickedItemId] = useState("");
-  const[addToCart, setAddToCart] = useState("Add to Cart")
+  const [clickedItemId, setclickedItemId] = useState("");
+  const [addToCart, setAddToCart] = useState("Add to Cart");
 
-
-  const userId = localStorage.getItem('Email');
-
+  const userId = localStorage.getItem("Email");
 
   const matchedUsers = watchlist.filter((item) => userId === item.userId);
 
-  const isInWatchlist = (id)=> matchedUsers.some((item)=> item.id === id)
-  
-  const toggleWatchlist = (res) =>{
+  const isInWatchlist = (id) => matchedUsers.some((item) => item.id === id);
 
-
-    if(isInWatchlist (res.id)){
+  const toggleWatchlist = (res) => {
+    if (isInWatchlist(res.id)) {
       removeFromWatchlist(res.id);
-    }else{
-      addToWatchlist(res, userId)
+    } else {
+      addToWatchlist(res, userId);
     }
-  }
+  };
 
-  useEffect(()=>{
-    fetchData()
-  },[])
+  useEffect(() => {
+    fetchData();
+  }, []);
 
   useEffect(() => {
     fetchproductData();
   }, []);
 
-  useEffect(()=>{
-    loadWatchlist();  },[])
+  useEffect(() => {
+    loadWatchlist();
+  }, []);
 
-  
   return (
     <div>
-        <Header />
-      
-      <div className="grid gap-8 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 p-5">
+      <Header />
 
+      <div className="grid gap-8 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 p-5">
         {productData.map((res) => (
           <div
             key={res.id}
-
             className="border border-1 border-gray-200 rounded-md hover:border-purple-600 transition-colors bg-white"
           >
-            <a href="./../src/product.html" className="block overflow-hidden"
-            onClick={(e) => {
-              e.preventDefault(); 
-              navigate("/products");
-              // console.log(res.id);
-              setclickedItemId(res.id);
-              localStorage.setItem("Clicked Item",res.id);
-              
-            }}>
-            
+            <a
+              href="./../src/product.html"
+              className="block overflow-hidden"
+              onClick={(e) => {
+                e.preventDefault();
+                navigate("/products");
+                // console.log(res.id);
+                setclickedItemId(res.id);
+                localStorage.setItem("Clicked Item", res.id);
+              }}
+            >
               <img
                 src={res.image}
                 alt=""
@@ -77,9 +80,15 @@ const Landing = () => {
               </h3>
               <h5 className="font-bold">£{res.price}</h5>
             </div>
-            <div className="flex justify-between py-3 px-4" onClick={()=>toggleWatchlist(res)}>
-              <button className= {`w-10 h-10 rounded-full border border-1  flex items-center justify-center ${isInWatchlist (res.id) ? "bg-purple-600 text-white" : "border-purple-600 text-purple-600 hover:bg-purple-600 hover:text-white"} transition-colors`}  >
-
+            <div className="flex justify-between py-3 px-4">
+              <button
+                className={`w-10 h-10 rounded-full border border-1  flex items-center justify-center ${
+                  isInWatchlist(res.id)
+                    ? "bg-purple-600 text-white"
+                    : "border-purple-600 text-purple-600 hover:bg-purple-600 hover:text-white"
+                } transition-colors`}
+                onClick={() => toggleWatchlist(res)}
+              >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   className="h-6 w-6"
@@ -95,14 +104,14 @@ const Landing = () => {
                   />
                 </svg>
               </button>
-              <button className="btn-primary">{addToCart}</button>
+              <button className="btn-primary" onClick={addToCart}>
+                Add to cart
+              </button>
             </div>
           </div>
         ))}
 
         {/* / Product Item */}
-
-       
       </div>
     </div>
   );

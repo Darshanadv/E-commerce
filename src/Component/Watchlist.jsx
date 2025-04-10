@@ -10,8 +10,6 @@ const Watchlist = () => {
 
   const [loggedinPersonDetail, setLoggedinPersonDetail] = useState([]);
 
-  console.log(loggedinPersonDetail);
-
   useEffect(() => {
     loadWatchlist();
   }, []);
@@ -46,19 +44,15 @@ const Watchlist = () => {
                     className="w-36 h-36 object-contain p-5"
                     alt=""
                   />{" "}
-                  {/* image fetched..*/}
                 </div>
                 <div>
                   <div className="flex flex-col justify-between">
                     <div className="flex flex-col justify-between mb-10">
-                      <h3>
-                        {item.title} {/* title fetched..*/}
-                      </h3>
+                      <h3>{item.title}</h3>
                       <span className="text-lg font-semibold">
                         {" "}
                         £{item.price}{" "}
                       </span>{" "}
-                      {/* price fetched..*/}
                     </div>
                     <div className="flex justify-start items-center">
                       <button
@@ -72,10 +66,7 @@ const Watchlist = () => {
                 </div>
               </div>
             ))}
-
-            {/*/ Product Item */}
           </div>
-          {/*/ Product Items */}
         </div>
       </main>
     </>

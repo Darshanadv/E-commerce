@@ -20,15 +20,6 @@ const Products = () => {
     loadWatchlist();
   }, []);
 
-  const checkWatchlist = () => {
-    //function to check if selected product is already is in watchlist
-    watchlist.map((item) => {
-      if (item.title == productItem.title) {
-        console.log("product already in watchlist");
-      }
-    });
-  };
-
   //order timing functionality start.. //
 
   const [currentTime, setCurrentTime] = useState();
@@ -105,14 +96,14 @@ const Products = () => {
   };
 
   const addToCart = () => {
-    toggleAddToCart(); // Call function to change button
+    toggleAddToCart();
     setTimeout(() => {
       const btn = document.querySelector("#addToCart");
       if (btn) {
-        btn.innerHTML = "Add to Cart"; // Reset button text after 1 sec
-        btn.style.backgroundColor = ""; // Reset background color
+        btn.innerHTML = "Add to Cart";
+        btn.style.backgroundColor = "";
       }
-    }, 800); // Wait 1 second
+    }, 800);
     const userId = currentUserData?.id;
     addToWatchlist(productItem, userId, orderingtime, quantity);
   };
@@ -136,11 +127,10 @@ const Products = () => {
               </div>
             </div>
             <div className="col-span-2">
-              <h1 className="text-3xl pb-5 font-semibold">
+              <h1 className="text-2xl pb-5 font-semibold">
                 {productItem.title}
               </h1>
 
-    
               <div className="flex items-center mb-6 justify-between">
                 <div className="flex items-center">
                   {[1, 2, 3, 4, 5].map((star) => (
@@ -148,23 +138,29 @@ const Products = () => {
                       xmlns="http://www.w3.org/2000/svg"
                       className={`h-6 w-6 `}
                       style={{
-                        color: productItem.rating?.rate >= star ? "orange" : "#d3d3d3"
+                        color:
+                          productItem.rating?.rate >= star
+                            ? "orange"
+                            : "#d3d3d3",
                       }}
-                      
                       viewBox="0 0 20 20"
                       fill="currentColor"
                     >
                       <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
                     </svg>
                   ))}
-                  <h3 className="text-2xl font-semibold">
-                    {productItem.rating?.rate}
-                  </h3>
-                  (<div className="text-xl">{productItem.rating?.count}</div>)
+                  <div className="flex items-center gap-2">
+                    <h3 className="text-xl font-semibold">
+                      {productItem.rating?.rate}
+                    </h3>
+                    <span className="text-[1.1rem] text-gray-600">
+                      ({productItem.rating?.count})
+                    </span>
+                  </div>
                 </div>
 
                 <div>
-                  <h3 className="text-2xl font-semibold">
+                  <h3 className="text-xl font-semibold">
                     {`Price: ${productItem.price * quantity}£`}
                   </h3>
                 </div>
@@ -173,14 +169,12 @@ const Products = () => {
               <a
                 href="#"
                 className="ml-3 font-normal text-purple-600 hover:text-purple-500"
-              >
-                {/* {(fetchproductData[userId]).rating.count} */}
-              </a>
+              ></a>
 
               <div className="flex items-center justify-between mb-10 p-3 rounded-xl bg-gray-200">
                 <label
                   htmlFor="quantity"
-                  className="block font-bold mr-4 text-2xl"
+                  className="block font-bold mr-4 text-xl"
                 >
                   Quantity
                 </label>
@@ -191,8 +185,8 @@ const Products = () => {
                   className="w-32 h-10 focus:border-purple-500 focus:outline-none rounded text-lg bg-white px-5"
                   onChange={(e) => {
                     const value = Number(e.target.value);
-                    if (value < 0) {
-                      setQuantity(0);
+                    if (value < 1) {
+                      setQuantity(1);
                     } else {
                       setQuantity(value);
                     }
@@ -223,7 +217,7 @@ const Products = () => {
                 </button>
               </div>
 
-              <div className="text-gray-500 mb-6 wysiwyg-content text-2xl">
+              <div className="text-gray-500 mb-6 wysiwyg-content text-xl">
                 <p className="block font-bold mr-4 mb-5 ">Description : </p>
                 <p className="text-xl">{productItem.description}</p>
               </div>

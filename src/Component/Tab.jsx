@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import useEcomStore from "../../store/useEcomStore";
 
-
 export function Tabs({ children }) {
   function findActiveTab(a) {
     return a.reduce((accumulator, currentValue, i) => {
@@ -12,7 +11,6 @@ export function Tabs({ children }) {
       return accumulator;
     }, 0);
   }
-
 
   function tabValidator(tab) {
     return tab.type.displayName === "Tab" ? true : false;
@@ -53,53 +51,55 @@ export function Tabs({ children }) {
 }
 
 export function Tab({ children, activeTab, currentTab, setActiveTab }) {
+  const { fetchproductData, productData } = useEcomStore();
 
-  const{fetchproductData, productData} = useEcomStore();
+  useEffect(() => {
+    fetchproductData();
+  }, []);
 
-   useEffect(()=>{
-      fetchproductData();
-    },[])
+  const [categoryList, setCategoryList] = useState([]);
+  const matchedCategoryItems = productData.filter(
+    (item) => children === item.category
+  );
 
-  const[categoryList, setCategoryList] = useState([])
-  const matchedCategoryItems = productData.filter((item) => children === item.category);
-  
-  const electronics = "electronics"
-  const defaultCategoryItems = matchedCategoryItems.filter((item)=>item.category === electronics)
+  const electronics = "electronics";
+  const defaultCategoryItems = matchedCategoryItems.filter(
+    (item) => item.category === electronics
+  );
   // console.log(defaultCategoryItems);
-  
 
   const categoryItem = () => {
     setActiveTab(currentTab);
     console.log(productData);
-    console.log(children);          // category select detail : category name
-    console.log(currentTab);        // order of selected category
+    console.log(children); // category select detail : category name
+    console.log(currentTab); // order of selected category
     console.log(matchedCategoryItems);
     setCategoryList(matchedCategoryItems);
   };
 
-  
   return (
     <>
-
       <div
         className={`px-5 py-3 rounded cursor-pointer
       ${activeTab === currentTab ? "bg-white" : "bg-blue-400 text-white"}`}
         onClick={() => categoryItem()}
       >
-        {children} 
+        {children}
       </div>
 
       <ul>
-  {categoryList?.length > 0 ? (
-    categoryList.map((item, id) => <li key={id}>{item.title}</li>)
-  ) : (
-    <li>{defaultCategoryItems?.map((item,id)=>( <li key={id}>{item.title}</li>
-      ))}</li>
-  )}
-  </ul>
+        {categoryList?.length > 0 ? (
+          categoryList.map((item, id) => <li key={id}>{item.title}</li>)
+        ) : (
+          <li>
+            {defaultCategoryItems?.map((item, id) => (
+              <li key={id}>{item.title}</li>
+            ))}
+          </li>
+        )}
+      </ul>
     </>
   );
-
 }
 
 Tab.displayName = "Tab";

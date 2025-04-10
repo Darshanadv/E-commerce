@@ -19,8 +19,6 @@ const Login = () => {
     fetchData();
   }, [fetchData]);
 
-
-
   useEffect(() => {
     if (storedEmail && storedPassword) {
       navigate("/landing");
@@ -30,16 +28,13 @@ const Login = () => {
   }, []);
 
   const login = () => {
-    console.log("Data before login attempt:", data);
     if (!data || data.length === 0) {
-      console.log("Data is not available yet. Please wait...");
       return;
     }
 
     const user = data.find(
       (user) => user.email === email && user.password === password
     );
-    console.log("User found:", user);
 
     if (user) {
       getCurrentUserData(user);
@@ -48,11 +43,10 @@ const Login = () => {
         localStorage.setItem("Email", email);
         localStorage.setItem("Password", password);
       }
-      console.log("Navigating to /landing...");
+
       setTimeout(() => navigate("/landing"), 300);
     } else {
       setCredentialMessage(false);
-      console.log("Credentials do not match");
     }
   };
 

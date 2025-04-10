@@ -85,8 +85,6 @@ const Cart = () => {
       0
     );
 
-    console.log(filterData);
-
     // after sum, a new object created to sent to my order page for view
     const newData = {
       userId: currentUserData?.id,
