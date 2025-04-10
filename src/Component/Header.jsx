@@ -19,11 +19,11 @@ const Header = () => {
       <header className="flex justify-between bg-slate-800 shadow-md text-white items-center">
         <div>
           <a
-            href="https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.cleanpng.com%2Fpng-e-commerce-logo-electronic-business-2257218%2F&psig=AOvVaw0VQcpogFdaZu6axQNBjOxQ&ust=1742398024522000&source=images&cd=vfe&opi=89978449&ved=0CBQQjRxqFwoTCID36cz4k4wDFQAAAAAdAAAAABAE"
+            href="/"
             className="block py-navbar-item pl-5 w-[3cm] "
             onClick={(e) => e.preventDefault()}
           >
-            <img src="./images/logo.png" alt="" />{" "}
+            <img src="/src/image/logo.png" alt="e-com logo" />{" "}
           </a>
         </div>
         <nav className="hidden md:block ">
