@@ -23,7 +23,7 @@ const Header = () => {
             className="block py-navbar-item pl-5 w-[3cm] "
             onClick={(e) => e.preventDefault()}
           >
-            <img src="/src/image/logo.png" alt="e-com logo" />{" "}
+            <img src="/src/image/logo.png" alt="Logo" />{" "}
           </a>
         </div>
         <nav className="hidden md:block ">
